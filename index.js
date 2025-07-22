@@ -7,14 +7,26 @@ console.log('Before');
 //         })
 //     })
 // })
- getUser(1)
-.then(user=>getRepositories(user.gitHubusername))
-.then(repos=>getCommit(repos[0]))
-.then(commits=>console.log('commits', commits))
-.catch(err=>console.log('Error', err.message))
-;
+//  getUser(1)
+// .then(user=>getRepositories(user.gitHubusername))
+// .then(repos=>getCommit(repos[0]))
+// .then(commits=>console.log('commits', commits))
+// .catch(err=>console.log('Error', err.message))
+// ;
 
+ async function displayCommits(){
+    try{
+        const user=await getUser(1)
+        const repos=await getRepositories(user.gitHubusername)
+        const commits=await getCommit(repos[0])
+        console.log(commits)
+    }
+    catch(err){
+        console.log('Error', err.message)
 
+    }
+}
+displayCommits()
 
 
 
@@ -44,7 +56,8 @@ function getCommit(repo){
     return new Promise((resolve, reject)=>{
          setTimeout(()=>{
         console.log('Calling the gitHub API...')
-        resolve(['commits'])
+        reject(new Error('cond not found the err'))
+        // resolve(['commits'])
     }, 2000)
     })
    
